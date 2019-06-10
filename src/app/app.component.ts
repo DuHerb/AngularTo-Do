@@ -20,7 +20,7 @@ export class AppComponent {
   ]
 
   toggleDone(event){
-    console.log(event);
+    // console.log(event);
     for(let i = 0; i < this.tasks.length; i++){
       if(this.tasks[i].description == event.target.textContent){
         if(this.tasks[i].done == true) {
@@ -32,7 +32,7 @@ export class AppComponent {
         }
       }
     }
-    console.log(this.tasks);
+    // console.log(this.tasks);
   }
 }
 
