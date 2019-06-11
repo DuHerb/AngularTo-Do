@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Task } from './models/task.model';
 
 @Component({
-  selector: 'header',
+  selector: 'output',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -12,27 +12,31 @@ export class AppComponent {
   month: number = this.currentTime.getMonth() + 1;
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear();
-
+  selectedTask: Task = null;
+  
   tasks: Task[] = [
-    new Task("Finish weekend Angular homework for Epicodus course"),
-    new Task('Begin brainstorming possible JavaScript group projects'),
-    new Task('Add README file to last few Angular repos on GitHub')
-  ]
+    new Task("Finish weekend Angular homework for Epicodus course",1),
+    new Task('Begin brainstorming possible JavaScript group projects',1),
+    new Task('Add README file to last few Angular repos on GitHub',1)
+  ];
 
-  toggleDone(event){
-    // console.log(event);
-    for(let i = 0; i < this.tasks.length; i++){
-      if(this.tasks[i].description == event.target.textContent){
-        if(this.tasks[i].done == true) {
-          this.tasks[i].done = false;
-          event.target.classList.remove('isDone');
-        } else {
-          this.tasks[i].done = true;
-          event.target.classList.add('isDone');
-        }
-      }
-    }
-    // console.log(this.tasks);
+  editTask(clickedTask) {
+    this.selectedTask = clickedTask;
   }
+
+  priorityColor(currentTask){
+    if(currentTask.priority === '3'){
+      return "bg-danger";
+    } else if(currentTask.priority === '2'){
+      return "bg-warning";
+    } else {
+      return "bg-info";
+    }
+  }
+
+  finishedEditing(){
+    this.selectedTask = null;
+  }
+
 }
 
